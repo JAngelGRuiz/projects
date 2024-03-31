@@ -1,0 +1,38 @@
+// Encuentra el número en un array con el índice de la segunda ocurrencia más pequeña.
+function findFirstRepeated(gifts: Array<number>) {
+  const numIndexes: Record<string, number[]> = {}
+  const repeated: Record<string, number> = {}
+  let currentMax = +Infinity;
+  let keyMax: string | null = null;
+  
+  for(let i=0; i < gifts.length; i++){
+    const num = gifts[i];
+    
+    if(num in numIndexes){
+      numIndexes[num].push(i);
+    } else {
+      numIndexes[num] = [i]
+    }
+  }
+  
+  for(const num in numIndexes){
+    const currentValue = numIndexes[num][1]
+
+    
+    if(numIndexes[num].length >= 2){
+      repeated[num] = currentValue;
+      
+      
+      if(currentValue < currentMax){
+        currentMax = currentValue;
+        keyMax = num
+      }
+    }
+    
+    
+  }
+
+  return keyMax ? Number(keyMax) : -1;
+}
+
+findFirstRepeated([1, 3, 4, 5, 0, 1, 3, 0, 7])

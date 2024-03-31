@@ -1,0 +1,27 @@
+// Find if the materials gifts can be built with the materials. 
+// This find if the string in the array could be written down with the materials letter.
+
+function manufacture(gifts: string[], materials: string) {
+
+  const reconstructed = gifts.map((gift) => {
+    const splittedGift = [...gift]
+    const contructedWord: string[] = [];
+    
+    
+    for(let i=0; i < splittedGift.length; i++){
+      if(materials.includes(splittedGift[i])){
+        contructedWord.push(splittedGift[i])
+      }
+    }
+    
+    return contructedWord.join('');
+  })
+  
+
+  return reconstructed.filter((gift, i) => gift.length === gifts[i].length)
+}
+
+const gifts = ['tren', 'oso', 'pelota']
+const materials = 'tronesa'
+
+manufacture(gifts, materials);

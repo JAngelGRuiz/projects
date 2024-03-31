@@ -1,0 +1,12 @@
+function findNaughtyStep(original: string, modified: string) {
+  const arrOriginal = [...original];
+  const arrModified = [...modified];
+  
+  const [arrToMap, nextArr] = arrOriginal.length > arrModified.length ? [arrOriginal, arrModified] : [arrModified, arrOriginal]
+  
+  return arrToMap.find((step, i) => step !== nextArr[i]) ?? ''
+}
+
+const original = 'abcd'
+const modified = 'abcde'
+findNaughtyStep(original, modified) // 'e'

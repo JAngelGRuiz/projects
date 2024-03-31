@@ -1,0 +1,83 @@
+const caesarCipher = (str: string, keySalt: number) => str.split("").map((letter) => {
+  const alphabetLetters = 26
+  const firstLowerLetter = 97;
+  const firstCapitalLetter = 65;
+  const unicode = letter.charCodeAt(0)
+  const firstLetter = letter < 'a' ? firstCapitalLetter : firstLowerLetter 
+  
+  if(!/[A-Z]|[a-z]$/.test(letter)){
+    return letter
+  }
+  
+  return String.fromCharCode((unicode - firstLetter + keySalt) % alphabetLetters + firstLetter)
+}).join("")
+
+/*function caesarCipher(s, k) {
+  return s.replace(/[a-z]/gi, m => {
+    const c = m < "a" ? 65 : 97;
+    return String.fromCharCode((m.charCodeAt(0) - c + k) % 26 + c)
+  });
+}*/
+
+caesarCipher("Always-Look-on-the-Bright-Side-of-Life", 5)
+console.log("Fqbfdx-Qttp-ts-ymj-Gwnlmy-Xnij-tk-Qnkj")
+
+/*
+Test.assertEquals(caesarCipher("middle-Outz", 2), "okffng-Qwvb")
+Test.assertEquals(caesarCipher("Always-Look-on-the-Bright-Side-of-Life", 5), "Fqbfdx-Qttp-ts-ymj-Gwnlmy-Xnij-tk-Qnkj")
+Test.assertEquals(caesarCipher("A friend in need is a friend indeed", 20), "U zlcyhx ch hyyx cm u zlcyhx chxyyx")
+Test.assertEquals(caesarCipher("A Fool and His Money Are Soon Parted.", 27), "B Gppm boe Ijt Npofz Bsf Tppo Qbsufe.")
+Test.assertEquals(caesarCipher("One should not worry over things that have already happened and that cannot be changed.", 49), "Lkb pelria klq tloov lsbo qefkdp qexq exsb xiobxav exmmbkba xka qexq zxkklq yb zexkdba.")
+Test.assertEquals(caesarCipher("Back to Square One is a popular saying that means a person has to start over, similar to: back to the drawing board.", 126), "Xwyg pk Omqwna Kja eo w lklqhwn owuejc pdwp iawjo w lanokj dwo pk opwnp kran, oeiehwn pk: xwyg pk pda znwsejc xkwnz.")
+*/
+
+// Exercise 1
+function dedupe(list = [
+    { id: 0},
+    { id: 0},
+    { id: 1},
+    { id: 5},
+    { id: 3},
+]) {
+  const seenIds = new Set();
+  const result = [];
+  
+  for(const item of list){
+    if(!seenIds.has(item.id)){
+      result.push(item);
+      seenIds.add(item.id);
+    } else {
+      const existingItem = result.find((i) => i.id === item.id);
+      Object.assign(existingItem, item);
+    }
+  }
+  
+  console.log(result)
+  
+  return result;
+}
+
+// Exercise 2
+const interview = (arr, tot) => {
+  const limits = [5,5,10,10,15,15,20,20];
+  return arr.filter((ele, i) => ele === limits[i]).length === 8 && tot <= 120 ? 'qualified' : 'disqualified'
+}
+
+console.log(interview([5,5,10,10,15,15,20, 20], 120))
+
+// Exercise 3 <<< Posible JS tricky exercise
+var x = 10
+function myFunc(){
+  console.log(x)
+  var x = 5
+}
+
+myFunc()
+
+const x = 10
+const app = () => {
+  console.log(x)
+  const x = 5
+}
+
+app()
